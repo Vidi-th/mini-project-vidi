@@ -55,6 +55,7 @@ export default {
     methods:{
         lastarr(data){
             let lastElement = data[data.length - 1];
+            console.log(lastElement);
             return lastElement;
         },
     }
