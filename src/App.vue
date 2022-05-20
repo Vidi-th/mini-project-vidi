@@ -28,9 +28,9 @@
         nav
       >
         <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
+          v-for="(item, index) in items"
+          :key="index"
+          @click="press(item.title)"
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -46,19 +46,19 @@
     
 
     <v-main>
-      <dashboard/>
+      <router-view/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Dashboard from './views/Dashboard.vue';
+
 
 export default {
   name: 'App',
 
   components: {
-    Dashboard,
+
   },
 
   data: () => ({
@@ -75,5 +75,11 @@ export default {
     ],
     right: null,
   }),
+
+  methods :{
+      press(path){
+      this.$router.push({name: path})
+    }
+  },
 };
 </script>
