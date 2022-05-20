@@ -1,13 +1,60 @@
 <template>
     <v-container>
-        <v-img
-        alt="IoT Soil Temp"
-        class=" white--text align-center"
-        contain
-        src="@/assets/cardSoilTemp.jpg"
-        max-width="250px"
-        >
-            <v-card-title class="display-1 text-right pl-6"> 31 °C </v-card-title>
-        </v-img>
+        <ApolloQuery
+        :query="gql => gql`
+            query MyQuery {
+                sensor {
+                    soil_temp
+                }
+            }
+        `"
+      >
+      <template v-slot="{ result: { loading, error, data } }">
+        <!-- Loading -->
+        <div v-if="loading" class="loading apollo">Loading...</div>
+
+        <!-- Error -->
+        <div v-else-if="error" class="error apollo">An error occurred
+          {{ error }}
+        </div>
+
+        <!-- Result -->
+        <div v-else-if="data" class="result apollo"> 
+            <v-list-item 
+            v-for="(item, index) in lastarr(data.sensor)" 
+            :key=index
+            >
+            <v-list-item-title> 
+            <v-img
+            alt="IoT Soil Temp"
+            class=" white--text align-center"
+            contain
+            src="@/assets/cardSoilTemp.jpg"
+            max-width="250px"
+            >
+                <v-card-title class="display-1 text-right pl-6"> {{item}} °C </v-card-title>
+            </v-img>
+            </v-list-item-title>
+            </v-list-item>
+        </div>
+
+        <!-- No result -->
+        <div v-else class="no-result apollo">No result :(</div>
+      </template>
+      </ApolloQuery>
     </v-container>
 </template>
+
+<script>
+export default {
+    setup() {
+        
+    },
+    methods:{
+        lastarr(data){
+            let lastElement = data[data.length - 1];
+            return lastElement;
+        },
+    }
+}
+</script>

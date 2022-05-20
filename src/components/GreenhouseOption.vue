@@ -5,8 +5,6 @@
         >
             <v-btn
             class="order-1 pa-3 mt-7"
-            v-bind="attrs"
-            v-on="on"
             >
             <v-icon>mdi-home-automation</v-icon>
             </v-btn>
