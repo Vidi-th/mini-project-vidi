@@ -12,7 +12,7 @@
             alt="IoT Greenhouse Logo"
             class="shrink mr-2"
             contain
-            src="@/assets/Logo.png"
+            src="@/assets/logo.png"
             transition="scale-transition"
             max-width="60px"
           />
@@ -43,62 +43,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-container fluid>
-    <v-layout row>
-    <v-app-bar
-      app
-      color="#DBE0E1"
-    >
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            label="Search Sensor"
-            filled
-            rounded
-            dense
-          ></v-text-field>
-        </v-col>
-
-      <v-spacer></v-spacer>
-      <v-col
-          cols="12"
-          sm="5"
-          md="3"
-        >
-        <v-btn
-          v-bind="attrs"
-          v-on="on"
-        >
-          <v-icon>mdi-bell-badge</v-icon>
-        </v-btn>
-        <div class="text-center">
-          <v-menu offset-y>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                v-bind="attrs"
-                v-on="on"
-              >
-                <v-icon>mdi-home-automation</v-icon>
-                <span class="mr-2">GH Surabaya</span>
-              </v-btn>
-            </template>
-            <v-list>
-              <v-list-item
-                v-for="(item, index) in itemGH"
-                :key="index"
-              >
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </div>
-      </v-col>
-    </v-app-bar>
-    </v-layout>
-    </v-container>
+    
 
     <v-main>
       <dashboard/>
