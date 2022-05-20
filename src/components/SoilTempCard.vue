@@ -1,14 +1,13 @@
 <template>
     <v-container>
         <v-img
-        alt="IoT Greenhouse Card"
-        class="white--text align-center"
+        alt="IoT Soil Temp"
+        class=" white--text align-center"
         contain
-        src="@/assets/card3.jpg"
+        src="@/assets/cardSoilTemp.jpg"
         max-width="250px"
         >
-            <v-card-title> Soil</v-card-title>
-            <v-card-title> Temperature</v-card-title>
+            <v-card-title class="display-1 text-right pl-6"> 31 °C </v-card-title>
         </v-img>
     </v-container>
 </template>

@@ -1,13 +1,13 @@
 <template>
     <v-container>
-         <v-img
+        <v-img
         alt="IoT CO2"
-        class="white--text align-center"
+        class=" white--text align-center"
         contain
-        src="@/assets/card3.jpg"
+        src="@/assets/cardCO2.jpg"
         max-width="250px"
         >
-            <v-card-title> CO2 </v-card-title>
+            <v-card-title class="display-0 text-right pl-6"> 1390 ppm </v-card-title>
         </v-img>
     </v-container>
 </template>

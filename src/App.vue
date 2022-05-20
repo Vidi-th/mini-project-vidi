@@ -43,8 +43,6 @@
       </v-list>
     </v-navigation-drawer>
 
-    
-
     <v-main>
       <router-view/>
     </v-main>
