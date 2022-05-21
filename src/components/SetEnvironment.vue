@@ -27,6 +27,7 @@
                     >
                         <v-text-field
                         label="Plant Name"
+                        v-model="plant_name"
                         hint="Tomat"
                         required
                         ></v-text-field>
@@ -37,7 +38,8 @@
                         md="4"
                     >
                         <v-text-field
-                        v-model=soilMoist
+                        label="Soil Moisture"
+                        v-model="soilMoist"
                         type="number"
                         hint="80"
                         required
@@ -49,7 +51,8 @@
                         md="4"
                     >
                         <v-text-field
-                        v-model=light
+                        label="Light Brightness"
+                        v-model="light"
                         type="number"
                         hint="75"
                         required
@@ -58,6 +61,7 @@
                     <v-col cols="12">
                         <v-text-field
                         label="Humidity"
+                        v-model="humidity"
                         type="number"
                         required
                         ></v-text-field>
@@ -65,6 +69,7 @@
                     <v-col cols="12">
                         <v-text-field
                         label="CO2"
+                        v-model="co2"
                         type="number"
                         required
                         ></v-text-field>
@@ -73,7 +78,8 @@
                         cols="12"
                     >
                         <v-text-field
-                        v-model=temp
+                        label="Temperature"
+                        v-model="temp"
                         type="number"
                         required
                         ></v-text-field>
@@ -92,19 +98,13 @@
                 </v-btn>
                 <ApolloMutation
                 :mutation="gql => gql`
-                    mutation MyMutation3($id: Int!, $title: String!) {
-                        update_todoList_by_pk(pk_columns: {id: $id}, _set: {title: $title}) {
-                            title
+                    mutation MyMutation($co2: Int, $humidity: Int, $light: Int, $plant_name: String, $soil_moist: Int, $temp: Int) {
+                        update_threshold_by_pk(pk_columns: {id: 1}, _set: {co2: $co2, humidity: $humidity, light: $light, plant_name: $plant_name, soil_moist: $soil_moist, temp: $temp}) {
+                            plant_name
                         }
                     }
                 `"
-                :variables="{
-                    co2: 1500,
-                    humidit: 60,
-                    light: 76,
-                    soil_moist: 89,
-                    temp: 29
-                }"
+                :variables="updateEnv"
                 >
                 <template v-slot="{ mutate, error}">
                 <!-- Error -->
@@ -115,7 +115,7 @@
                     <v-btn
                         color="#94B447"
                         text
-                        @click="dialog = false && mutate()"
+                        @click="mutate(); dialog = false"
                     >
                         Save
                     </v-btn>
@@ -136,6 +136,19 @@ export default {
         light:0,
         soilMoist:0,
         temp:0,
+        plant_name:"",
     }),
+    computed:{
+        updateEnv(){
+            return{
+                co2: this.co2,
+                humidity: this.humidity,
+                light: this.light,
+                plant_name: this.plant_name,
+                soil_moist: this.soilMoist,
+                temp: this.temp
+            }
+        },
+    }
 }
 </script>

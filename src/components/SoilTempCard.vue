@@ -32,7 +32,7 @@
             src="@/assets/cardSoilTemp.jpg"
             max-width="250px"
             >
-                <v-card-title class="display-1 text-right pl-6"> {{item}} °C </v-card-title>
+                <v-card-title class="display-1 text-right pl-6"> {{item.soil_temp}} °C </v-card-title>
             </v-img>
             </v-list-item-title>
             </v-list-item>
@@ -41,6 +41,18 @@
         <!-- No result -->
         <div v-else class="no-result apollo">No result :(</div>
       </template>
+      <ApolloSubscribeToMore
+        :document="
+          (gql) => gql`
+            subscription MySubscription {
+                sensor {
+                    soil_temp
+                }
+            }
+          `
+        "
+        :updateQuery="onUpdated"
+      />
       </ApolloQuery>
     </v-container>
 </template>
@@ -52,8 +64,14 @@ export default {
     },
     methods:{
         lastarr(data){
-            let lastElement = data[data.length - 1];
+            let lastElement =[];
+            lastElement[0] = data[data.length - 1];
             return lastElement;
+        },
+        onUpdated(previousResult, { subscriptionData }) {
+            return {
+                sensor: subscriptionData.data.sensor
+            }
         },
     }
 }

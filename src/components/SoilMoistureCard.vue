@@ -36,7 +36,7 @@
                 <div
                 class="d-flex justify-center mb-6"
                 >
-                    <v-card-title class="display-3">{{item}}%</v-card-title>
+                    <v-card-title class="display-3">{{item.soil_moisture}}%</v-card-title>
                 </div>
                 </v-img>
             </v-list-item-title>
@@ -46,6 +46,18 @@
         <!-- No result -->
         <div v-else class="no-result apollo">No result :(</div>
       </template>
+      <ApolloSubscribeToMore
+        :document="
+          (gql) => gql`
+            subscription MySubscription {
+                sensor {
+                    soil_moisture
+                }
+            }
+          `
+        "
+        :updateQuery="onUpdated"
+      />
       </ApolloQuery>
     </v-container>
 </template>
@@ -57,8 +69,14 @@ export default {
     }),
     methods:{
         lastarr(data){
-            let lastElement = data[data.length - 1];
+            let lastElement =[];
+            lastElement[0] = data[data.length - 1];
             return lastElement;
+        },
+        onUpdated(previousResult, { subscriptionData }) {
+            return {
+                sensor: subscriptionData.data.sensor
+            }
         },
     }
 }
