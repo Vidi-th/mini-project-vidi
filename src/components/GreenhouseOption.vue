@@ -4,12 +4,12 @@
       class="d-flex"
       >
 
-        <v-btn class="order-1 pa-3 mt-7"
+        <v-btn class="order-1 mt-4"
         >
         <v-icon>mdi-home-automation</v-icon>
         </v-btn>
 
-      <ApolloQuery 
+      <ApolloQuery class="order-2 mt-7"
         :query="gql => gql`
             query GreenHouse {
               green_house {
@@ -31,20 +31,13 @@
 
         <!-- Result -->
         <div v-else-if="data" class="result apollo">
-          {{data.green_house.nama}}
-          <!-- <GreenhouseItem
+          <GreenhouseItem
           v-for="(item, index) in data.green_house"
           :key="index"
           :data="item"
-          :id="item.id"
-          >
-          </GreenhouseItem> -->
-          <v-list-item 
-                v-for="(item, index) in data.green_house" 
-                :key=index
-            >
-            {{addData(item)}}
-          </v-list-item>
+          :id="index"
+          @list-greenhouse="addData"
+          />
         </div>
 
         <!-- No result -->
@@ -64,40 +57,44 @@
         :updateQuery="onUpdated"
       />
       </ApolloQuery>
-        <v-select class="order-2 pa-3 mt-4"
+        <v-select class="order-2 mt-4"
+            :items="greenhouseItem"
+            label="Select Green House"
             v-model="select"
-            :items="greenhouseItem.nama"
-            item-text="name"
-            label="Select"
             return-object
             single-line
             item-color="#E5E5E5"
-            ></v-select>
+            >{{changeGH(select)}}</v-select>
       </div>
     </v-container>
 </template>
 
 <script>
-//import GreenhouseItem from "@/components/GreenhouseOptionItem.vue"
+import GreenhouseItem from "@/components/GreenhouseOptionItem.vue"
 
 export default {
   components: {
-    // GreenhouseItem,
+    GreenhouseItem,
   },
   
   data() {
     return {
-      select:{},
+      select:"",
       greenhouseItem: [],
+      green_house:{},
     };
   },
 
   methods: {
-    addData(param){
-      this.greenhouseItem.push(param);
-      console.log(this.greenhouseItem);
-      // this.select = param[0];
-      return param;
+    addData(param, id){
+      if(id>=this.greenhouseItem.length){
+        this.greenhouseItem.push(param);
+      }
+    },
+
+    changeGH(param){
+      console.log(param);
+      this.$store.dispatch('selectGH', param);
     },
 
     onUpdated(previousResult, { subscriptionData }) {
