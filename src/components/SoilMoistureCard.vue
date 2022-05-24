@@ -85,13 +85,18 @@
       <ApolloSubscribeToMore
         :document="
           (gql) => gql`
-            subscription MySubscription {
-                sensor {
-                    soil_moisture
+            subscription MySubscription($nama: String!) {
+                green_house(where: {nama: {_eq: $nama}}) {
+                    sensors {
+                        soil_moisture
+                        id
+                        id_gh
+                    }
                 }
             }
           `
         "
+        :variables="greenhouseComputed"
         :updateQuery="onUpdated"
       />
       </ApolloQuery>
@@ -102,16 +107,18 @@
 export default {
     data: () => ({
         node: 1,
+        green_house:{},
     }),
     methods:{
         lastarr(data){
             let lastElement =[];
             lastElement[0] = data[data.length - 1];
+            this.$store.dispatch('updateMoist', lastElement[0].soil_moisture);
             return lastElement;
         },
         onUpdated(previousResult, { subscriptionData }) {
             return {
-                sensor: subscriptionData.data.sensor
+                green_house: subscriptionData.data.green_house
             }
         },
     },

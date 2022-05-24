@@ -93,7 +93,6 @@ export default {
     },
 
     changeGH(param){
-      console.log(param);
       this.$store.dispatch('selectGH', param);
     },
 

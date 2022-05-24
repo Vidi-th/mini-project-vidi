@@ -76,18 +76,23 @@
         <!-- No result -->
         <div v-else class="no-result apollo">No result :(</div>
       </template>
-      <!-- <ApolloSubscribeToMore
+      <ApolloSubscribeToMore
         :document="
           (gql) => gql`
-            subscription MySubscription {
-                sensors {
-                    humidity
+            subscription MySubscription($nama: String!) {
+                green_house(where: {nama: {_eq: $nama}}) {
+                    sensors {
+                        humidity
+                        id
+                        id_gh
+                    }
                 }
             }
           `
         "
-        :updateQuery="onUpdated" -->
-      <!-- /> -->
+        :variables="greenhouseComputed"
+        :updateQuery="onUpdated"
+      />
       </ApolloQuery>
     </v-container>
 </template>
@@ -97,16 +102,19 @@ export default {
     setup() {
         
     },
+    data: () => ({
+        green_house:{},
+    }),
     methods:{
         lastarr(data){
             let lastElement =[];
             lastElement[0] = data[data.length - 1];
-            console.log(lastElement);
+            this.$store.dispatch('updateHumidity', lastElement[0].humidity);
             return lastElement;
         },
         onUpdated(previousResult, { subscriptionData }) {
             return {
-                sensors: subscriptionData.data.sensors
+                green_house: subscriptionData.data.green_house
             }
         },
     },
