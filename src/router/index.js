@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Dashboard from "@/views/Dashboard.vue"
 import About from "@/views/About.vue"
 import Installation from "@/views/Installation.vue"
+import InstallationGH from "@/views/InstallationGH.vue"
+import InstallationSensor from "@/views/InstallationSensor.vue"
 import Statistic from "@/views/Statistics.vue"
 
 Vue.use(VueRouter);
@@ -27,6 +29,16 @@ const routes = [
         path: "/Statistics",
         name: "Statistics",
         component: Statistic,
+    },
+    {
+        path: "/InstallGH",
+        name: "InstallGH",
+        component: InstallationGH,
+    },
+    {
+        path: "/InstallSensor",
+        name: "InstallSensor",
+        component: InstallationSensor,
     },
 ];
 

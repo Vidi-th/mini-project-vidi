@@ -4,7 +4,7 @@
       class="d-flex"
       >
       
-      <AddNewGH class="order-1 mt-4"/>
+      <AddNewGH class="order-1 mt-3"/>
 
       <ApolloQuery
         :query="gql => gql`
