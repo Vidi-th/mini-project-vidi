@@ -1,15 +1,12 @@
 <template>
-    <v-container>
+    <v-container class="pa-0">
       <div
       class="d-flex"
       >
+      
+      <AddNewGH class="order-1 mt-4"/>
 
-        <v-btn class="order-1 mt-4"
-        >
-        <v-icon>mdi-home-automation</v-icon>
-        </v-btn>
-
-      <ApolloQuery class="order-2 mt-7"
+      <ApolloQuery
         :query="gql => gql`
             query GreenHouse {
               green_house {
@@ -31,7 +28,7 @@
 
         <!-- Result -->
         <div v-else-if="data" class="result apollo">
-          <GreenhouseItem
+          <GreenhouseItem 
           v-for="(item, index) in data.green_house"
           :key="index"
           :data="item"
@@ -57,24 +54,26 @@
         :updateQuery="onUpdated"
       />
       </ApolloQuery>
-        <v-select class="order-2 mt-4"
-            :items="greenhouseItem"
-            label="Select Green House"
-            v-model="select"
-            return-object
-            single-line
-            item-color="#E5E5E5"
-            >{{changeGH(select)}}</v-select>
+      <v-select class="order-2 mt-7"
+          :items="greenhouseItem"
+          label="Select Green House"
+          v-model="select"
+          return-object
+          single-line
+          item-color="#E5E5E5"
+          >{{changeGH(select)}}</v-select>
       </div>
     </v-container>
 </template>
 
 <script>
 import GreenhouseItem from "@/components/GreenhouseOptionItem.vue"
+import AddNewGH from "@/components/AddNewGreenhouse.vue"
 
 export default {
   components: {
     GreenhouseItem,
+    AddNewGH,
   },
   
   data() {

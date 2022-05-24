@@ -16,7 +16,7 @@
             <v-icon>mdi-bell-badge</v-icon>
             </v-btn>
 
-            <div class="order-3 pa-2 pt-4">
+            <div class="order-3">
             <greenhouse-option/>
             </div>
             </v-toolbar>
