@@ -28,16 +28,6 @@
 
                 <div>by setting the setup on the ESP32 code</div>
                 </v-card-text>
-
-                <v-card-actions>
-                <v-btn
-                    color="#94B447"
-                    text
-                    @click="press('InstallSensor')"
-                >
-                    Explore
-                </v-btn>
-                </v-card-actions>
             </v-card>
         </div>
         
