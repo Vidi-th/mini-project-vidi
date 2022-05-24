@@ -113,6 +113,7 @@ export default {
         lastarr(data){
             let lastElement =[];
             lastElement[0] = data[data.length - 1];
+            this.$store.dispatch('updateMoist', lastElement[0].soil_moisture);
             return lastElement;
         },
         onUpdated(previousResult, { subscriptionData }) {

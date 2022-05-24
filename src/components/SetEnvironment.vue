@@ -115,7 +115,7 @@
                     <v-btn
                         color="#94B447"
                         text
-                        @click="mutate(); dialog = false"
+                        @click="mutate(); dialog = false; addEnvStore()"
                     >
                         Save
                     </v-btn>
@@ -138,6 +138,11 @@ export default {
         temp:0,
         plant_name:"",
     }),
+    methods:{
+        addEnvStore(){
+            this.$store.dispatch('updateTreshold', this.updateEnv);
+        },
+    },
     computed:{
         updateEnv(){
             return{

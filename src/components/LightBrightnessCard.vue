@@ -114,6 +114,7 @@ export default {
         lastarr(data){
             let lastElement =[];
             lastElement[0] = data[data.length - 1];
+            this.$store.dispatch('updateLight', lastElement[0].light_brightness);
             return lastElement;
         },
         onUpdated(previousResult, { subscriptionData }) {

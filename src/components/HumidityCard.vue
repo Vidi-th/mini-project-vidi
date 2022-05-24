@@ -109,6 +109,7 @@ export default {
         lastarr(data){
             let lastElement =[];
             lastElement[0] = data[data.length - 1];
+            this.$store.dispatch('updateHumidity', lastElement[0].humidity);
             return lastElement;
         },
         onUpdated(previousResult, { subscriptionData }) {

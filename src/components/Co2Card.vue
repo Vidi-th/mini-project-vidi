@@ -109,6 +109,7 @@ export default {
         lastarr(data){
             let lastElement =[];
             lastElement[0] = data[data.length - 1];
+            this.$store.dispatch('updateCo2', lastElement[0].co2);
             return lastElement;
         },
         onUpdated(previousResult, { subscriptionData }) {

@@ -108,6 +108,7 @@ export default {
         lastarr(data){
             let lastElement =[];
             lastElement[0] = data[data.length - 1];
+            this.$store.dispatch('updateTemp', lastElement[0].soil_temp);
             return lastElement;
         },
         onUpdated(previousResult, { subscriptionData }) {
