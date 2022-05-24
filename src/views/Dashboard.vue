@@ -7,21 +7,16 @@
             color="#E5E5E5"
             class="rounded-xl"
             >
-            <v-text-field
-            class="order-1 pa-2"
-            label="Search Sensor"
-            hide-details="auto"
-            ></v-text-field>
 
-            <v-spacer class="order-2 pa-2"></v-spacer>
+            <v-spacer class="order-1 pa-2"></v-spacer>
 
             <v-btn
-            class="order-3 pa-2"
+            class="order-2 pa-2"
             >
             <v-icon>mdi-bell-badge</v-icon>
             </v-btn>
 
-            <div class="order-4 pa-2">
+            <div class="order-3">
             <greenhouse-option/>
             </div>
             </v-toolbar>
@@ -30,9 +25,10 @@
         <div
         class="d-flex justify-center mb-6"
         >
-            <Location/>
-            <v-spacer class="order-1 pa-2"></v-spacer>
-            <v-row class="order-2 pa-2">
+            <v-icon class="order-1 pa-2">mdi-map-marker-radius</v-icon>
+            <Location class="order-2 pa-2 pt-4"/>
+            <v-spacer class="order-3 pa-2"></v-spacer>
+            <v-row class="order-4 pa-2">
                 <SetEnv/>
             </v-row>
         </div>

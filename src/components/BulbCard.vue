@@ -1,6 +1,8 @@
 <template>
     <v-container>
-        <v-img v-if="modeBulb"
+      <div>{{sensorNow()}}</div>
+        <v-img 
+        v-if="modeBulb"
         alt="IoT Greenhouse Card"
         contain
         src="@/assets/BulbOn.png"
@@ -24,5 +26,25 @@ export default {
       modeBulb: false,
     };
   },
+  methods: {
+    sensorNow(){
+      if((this.tresholdFromStore[0].light) > (this.lightFromStore) && (this.tresholdFromStore[0].temp) > (this.tempFromStore)){
+        this.modeBulb = true;
+      }
+      else {this.modeBulb = false;}
+    },
+    
+  },
+  computed: {
+    tresholdFromStore(){
+      return this.$store.state.treshold;
+    },
+    lightFromStore(){
+      return this.$store.state.lightNow;
+    },
+    tempFromStore(){
+      return this.$store.state.tempNow;
+    },
+  }
 }
 </script>
