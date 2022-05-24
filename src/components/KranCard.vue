@@ -28,9 +28,9 @@ export default {
   methods: {
     sensorNow(){
       if((this.tresholdFromStore[0].soil_moist) > (this.moistFromStore) && (this.tresholdFromStore[0].humidity) > (this.humidityFromStore)){
-        return this.modeKran = true;
+        this.modeKran = true;
       }
-      else {return this.modeKran = false;}
+      else {this.modeKran = false;}
     },
     
   },

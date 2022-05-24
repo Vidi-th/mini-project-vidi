@@ -29,9 +29,9 @@ export default {
   methods: {
     sensorNow(){
       if((this.tresholdFromStore[0].light) > (this.lightFromStore) && (this.tresholdFromStore[0].temp) > (this.tempFromStore)){
-        return this.modeBulb = true;
+        this.modeBulb = true;
       }
-      else {return this.modeBulb = false;}
+      else {this.modeBulb = false;}
     },
     
   },
