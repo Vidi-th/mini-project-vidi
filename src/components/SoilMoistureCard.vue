@@ -129,7 +129,6 @@ export default {
             }
             return {nama: this.greenhouseStore}
         },
-
         greenhouseStore(){
             return this.$store.state.selectGH;
         }

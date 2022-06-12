@@ -1,11 +1,47 @@
 <template>
     <v-container class="pa-0">
-      <div
-      class="d-flex"
-      >
-      
-      <AddNewGH class="order-1 mt-3"/>
+        <v-toolbar
+          color="#E5E5E5"
+          class="rounded-xl"
+        >
+          <v-col
+          cols="12"
+          sm="6"
+          md="8"
+          >
+          </v-col>
 
+          <v-col
+            cols="6"
+            md="4"
+          >
+            <div
+            class="d-flex"
+            >
+              <div class="order-1 pa-2">
+                <v-btn>
+                  <v-icon>mdi-bell-badge</v-icon>
+                </v-btn>
+              </div>
+
+              <div class="order-2 pa-2">
+                <AddNewGH/>
+              </div>
+              
+              <div class="order-3 pa-2 mt-4">
+                <v-select
+                :items="greenhouseItem"
+                label="Select Green House"
+                v-model="select"
+                return-object
+                single-line
+                item-color="#E5E5E5"
+                >{{changeGH(select)}}</v-select>
+              </div>
+
+            </div>
+            </v-col>
+       </v-toolbar>
       <ApolloQuery
         :query="gql => gql`
             query GreenHouse {
@@ -28,13 +64,12 @@
 
         <!-- Result -->
         <div v-else-if="data" class="result apollo">
-          <GreenhouseItem 
+          <div
           v-for="(item, index) in data.green_house"
           :key="index"
-          :data="item"
-          :id="index"
-          @list-greenhouse="addData"
-          />
+          >
+          {{addData(item.nama,index)}}
+          </div>
         </div>
 
         <!-- No result -->
@@ -54,25 +89,16 @@
         :updateQuery="onUpdated"
       />
       </ApolloQuery>
-      <v-select class="order-2 mt-7"
-          :items="greenhouseItem"
-          label="Select Green House"
-          v-model="select"
-          return-object
-          single-line
-          item-color="#E5E5E5"
-          >{{changeGH(select)}}</v-select>
-      </div>
+      
     </v-container>
 </template>
 
 <script>
-import GreenhouseItem from "@/components/GreenhouseOptionItem.vue"
 import AddNewGH from "@/components/AddNewGreenhouse.vue"
 
 export default {
   components: {
-    GreenhouseItem,
+
     AddNewGH,
   },
   
@@ -103,3 +129,20 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.order-1{
+  display: flex;
+  align-items: center;
+}
+
+.order-2{
+  display: flex;
+  align-items: center;
+}
+
+.order-3{
+  display: flex;
+  align-items: center;
+}
+</style>
