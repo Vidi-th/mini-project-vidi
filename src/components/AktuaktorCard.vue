@@ -8,7 +8,7 @@
             <div class="order-2 pa-2">
                 <div>{{kranNow()}}</div>
                 <v-img
-                v-if="modeKran"
+                v-if="modeKran == true"
                 alt="IoT Greenhouse Card"
                 contain
                 src="@/assets/KranOpen.png"
@@ -16,7 +16,7 @@
                 />
 
                 <v-img
-                v-if="!modeKran"
+                v-if="modeKran == false"
                 alt="IoT Greenhouse Card"
                 contain
                 src="@/assets/KranClose.png"
@@ -59,21 +59,30 @@ export default {
   },
   methods: {
     kranNow(){
-      if((this.tresholdFromStore[0].soil_moist) > (this.moistFromStore) && (this.tresholdFromStore[0].humidity) > (this.humidityFromStore)){
+      if((this.tresholdMoist) > (this.moistFromStore) && (this.tresholdHumidity) > (this.humidityFromStore)){
         this.modeKran = true;
       }
       else {this.modeKran = false;}
     },
     bulbNow(){
-      if((this.tresholdFromStore[0].light) > (this.lightFromStore) && (this.tresholdFromStore[0].temp) > (this.tempFromStore)){
+      if((this.tresholdLight) > (this.lightFromStore) && (this.tresholdTemp) > (this.tempFromStore)){
         this.modeBulb = true;
       }
       else {this.modeBulb = false;}
     },
   },
   computed: {
-    tresholdFromStore(){
-      return this.$store.state.treshold;
+    tresholdMoist(){
+      return this.$store.state.tresholdMoist;
+    },
+    tresholdLight(){
+      return this.$store.state.tresholdLight;
+    },
+    tresholdHumidity(){
+      return this.$store.state.tresholdHumidity;
+    },
+    tresholdTemp(){
+      return this.$store.state.tresholdTemp;
     },
     humidityFromStore(){
       return this.$store.state.humidityNow;

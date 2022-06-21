@@ -42,88 +42,25 @@
 
                  <div v-else>
                     {{changeActive()}}
-                    <div
-                    class="d-flex justify-center mb-6"
-                    >
-                        <v-spacer class="order-1 pa-2"></v-spacer>
-                        
-                        <v-img
-                        class="order-2 pa-2 white--text align-center"
-                        alt="IoT Soil Moisture No Sensor"
-                        contain
-                        src="@/assets/cardSoilMoist.jpg"
-                        max-width="450px"
-                        >
-                            <v-card-title class="pl-16 display-3"> {{"No Sensor"}}</v-card-title>
-                        </v-img>
-
-                        <v-spacer class="order-3 pa-2"></v-spacer>
-
-                        <v-img
-                        class="order-4 pa-2 white--text align-center"
-                        alt="IoT Light Brightness No Sensor"
-                        contain
-                        src="@/assets/cardLightBright.jpg"
-                        max-width="450px"
-                        >
-                            <v-card-title class="pl-16 display-3"> {{"No Sensor"}}</v-card-title>
-                        </v-img>
-                    </div>
-
-                    <div
-                    class="d-flex justify-center mb-6"
-                    >
-                        <v-spacer class="order-1 pa-2"></v-spacer>
-
-                        <v-img
-                        class="order-2 white--text align-center"
-                        alt="IoT Humidity No Sensor"
-                        contain
-                        src="@/assets/card_empty.png"
-                        max-width="250px"
-                        >
-                            <v-card-title class="pl-12 display-1"> {{"No Sensor"}}</v-card-title>
-                        </v-img>
-
-                        <v-spacer class="order-3 pa-2"></v-spacer>
-
-                        <v-img
-                        class="order-4 white--text align-center"
-                        alt="IoT CO2 No Sensor"
-                        contain
-                        src="@/assets/card_empty.png"
-                        max-width="250px"
-                        >
-                            <v-card-title class="pl-12 display-1"> {{"No Sensor"}}</v-card-title>
-                        </v-img>
-
-                        <v-spacer class="order-5 pa-2"></v-spacer>
-
-                        <v-img
-                        class="order-6 white--text align-center"
-                        alt="IoT Soil Temp No Sensor"
-                        contain
-                        src="@/assets/card_empty.png"
-                        max-width="250px"
-                        >
-                            <v-card-title class="pl-12 display-1"> {{"No Sensor"}}</v-card-title>
-                        </v-img>
-                    </div>
                  </div>
             </div>
 
             <div v-else class="no-result apollo">
                 {{changeActive()}}
-                <v-img
-                alt="No Data"
-                class=" white--text align-center"
-                contain
-                src="@/assets/card_empty_xl.jpg"
-                max-width="450px"
+                <div class="d-flex justify-center mb-12"
                 >
-                    <v-card-title class="display-3 text-right pl-12"> {{"Select Your"}}</v-card-title>
-                    <v-card-title class="display-3 text-right pl-12"> {{"Greenhouse"}}</v-card-title>
-                </v-img>
+                    <v-spacer class="order-1 pa-2"></v-spacer>
+                    <v-img
+                    class=" order-2 white--text align-center"
+                    contain
+                    src="@/assets/card_empty_xl-min.jpg"
+                    max-width="450px"
+                    >
+                        <v-card-title class="display-3 text-right pl-12"> {{"Select Your"}}</v-card-title>
+                        <v-card-title class="display-3 text-right pl-12"> {{"Greenhouse"}}</v-card-title>
+                    </v-img>
+                    <v-spacer class="order-3 pa-2"></v-spacer>
+                </div>
             </div>
         </div>
 
@@ -162,7 +99,7 @@
             class="order-2 pa-2 white--text align-center"
             alt="IoT Soil Moisture"
             contain
-            src="@/assets/cardSoilMoist.jpg"
+            src="@/assets/cardSoilMoist-min.jpg"
             max-width="450px"
             >
                 <div class="d-flex justify-center mb-6">
@@ -176,7 +113,7 @@
             class="order-4 pa-2 white--text align-center"
             alt="IoT Light Brightness"
             contain
-            src="@/assets/cardLightBright.jpg"
+            src="@/assets/cardLightBright-min.jpg"
             max-width="450px"
             >
                 <div class="d-flex justify-center mb-6">
@@ -197,7 +134,7 @@
                     alt="IoT Humidity"
                     class=" white--text align-center"
                     contain
-                    src="@/assets/cardHumidity.jpg"
+                    src="@/assets/cardHumidity-min.jpg"
                     max-width="250px"
                     >
                         <v-card-title class="display-1 text-right pl-6"> {{humidityFromStore}}%</v-card-title>
@@ -210,7 +147,7 @@
                     alt="IoT CO2"
                     class=" white--text align-center"
                     contain
-                    src="@/assets/cardCO2.jpg"
+                    src="@/assets/cardCO2-min.jpg"
                     max-width="250px"
                     >
                         <v-card-title class="display-0 text-right pl-4"> {{co2FromStore}} ppm </v-card-title>
@@ -224,13 +161,86 @@
                     alt="IoT Soil Temp"
                     class=" white--text align-center"
                     contain
-                    src="@/assets/cardSoilTemp.jpg"
+                    src="@/assets/cardSoilTemp-min.jpg"
                     max-width="250px"
                     >
                         <v-card-title class="display-1 text-right pl-6"> {{tempFromStore}} °C </v-card-title>
                     </v-img>
                 </div>
                 <v-spacer class="order-7 pa-2"></v-spacer>
+        </div>
+        <div v-else>
+            <div
+            class="d-flex justify-center mb-6"
+            >
+                <v-spacer class="order-1 pa-2"></v-spacer>
+                
+                <v-img
+                class="order-2 pa-2 white--text align-center"
+                alt="IoT Soil Moisture No Sensor"
+                contain
+                src="@/assets/cardSoilMoist-min.jpg"
+                max-width="450px"
+                >
+                    <v-card-title class="pl-16 display-3"> {{"No Sensor"}}</v-card-title>
+                </v-img>
+
+                <v-spacer class="order-3 pa-2"></v-spacer>
+
+                <v-img
+                class="order-4 pa-2 white--text align-center"
+                alt="IoT Light Brightness No Sensor"
+                contain
+                src="@/assets/cardLightBright-min.jpg"
+                max-width="450px"
+                >
+                    <v-card-title class="pl-16 display-3"> {{"No Sensor"}}</v-card-title>
+                </v-img>
+
+                <v-spacer class="order-5 pa-2"></v-spacer>
+            </div>
+
+            <div
+            class="d-flex justify-center mb-6"
+            >
+                <v-spacer class="order-1 pa-2"></v-spacer>
+
+                <v-img
+                class="order-2 white--text align-center"
+                alt="IoT Humidity No Sensor"
+                contain
+                src="@/assets/card_empty-min.png"
+                max-width="250px"
+                >
+                    <v-card-title class="pl-12 display-1"> {{"No Sensor"}}</v-card-title>
+                </v-img>
+
+                <v-spacer class="order-3 pa-2"></v-spacer>
+
+                <v-img
+                class="order-4 white--text align-center"
+                alt="IoT CO2 No Sensor"
+                contain
+                src="@/assets/card_empty-min.png"
+                max-width="250px"
+                >
+                    <v-card-title class="pl-12 display-1"> {{"No Sensor"}}</v-card-title>
+                </v-img>
+
+                <v-spacer class="order-5 pa-2"></v-spacer>
+
+                <v-img
+                class="order-6 white--text align-center"
+                alt="IoT Soil Temp No Sensor"
+                contain
+                src="@/assets/card_empty-min.png"
+                max-width="250px"
+                >
+                    <v-card-title class="pl-12 display-1"> {{"No Sensor"}}</v-card-title>
+                </v-img>
+
+                <v-spacer class="order-7 pa-2"></v-spacer>
+            </div>
         </div>
     </v-container>
 </template>
@@ -247,7 +257,6 @@ export default {
             let lastElement =[];
             lastElement[0] = data[data.length - 1];
             this.cardActive = true;
-            console.log(lastElement);
             this.$store.dispatch('updateMoist', lastElement[0].soil_moisture);
             this.$store.dispatch('updateLight', lastElement[0].light_brightness);
             this.$store.dispatch('updateHumidity', lastElement[0].humidity);

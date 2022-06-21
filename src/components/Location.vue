@@ -7,7 +7,7 @@
                 green_house(where: {nama: {_eq:$nama}}) {
                     Alamat
                 }
-                }
+            }
         `"
         :variables="greenhouseComputed"
       >

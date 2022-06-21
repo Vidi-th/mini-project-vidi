@@ -16,7 +16,7 @@ const httpLink = new HttpLink({
 })
 
 const wsLink = new WebSocketLink({
-  uri:'wss://mini-project-vidi.hasura.app/v1/graphql',
+  uri:'ws://mini-project-vidi.hasura.app/v1/graphql',
   options: {
       reconnect: true,
   }

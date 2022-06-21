@@ -11,7 +11,6 @@
                 <SetEnv/>
             </v-row>
         </div>
-
         <SensorCard/>
         <AktuaktorCard/>
         

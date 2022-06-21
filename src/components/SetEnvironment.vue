@@ -2,6 +2,40 @@
     <v-container>
         <ApolloQuery
         :query="gql => gql`
+            query SearchID_GH($nama: String!) {
+                green_house(where: {nama: {_eq:$nama}}) {
+                    id
+                }
+            }
+        `"
+        :variables="greenhouseComputed"
+      >
+      <template v-slot="{ result: { loading, error, data } }">
+        <!-- Loading -->
+        <div v-if="loading" class="loading apollo">Loading...</div>
+
+        <!-- Error -->
+        <div v-else-if="error" class="error apollo">An error occurred
+          {{ error }}
+        </div>
+
+        <!-- Result -->
+        <div v-else-if="data" class="result apollo"> 
+            <div
+            v-for="(item, index) in data.green_house"
+            :key="index"
+            >
+                {{addIdGreenhouse(item.id)}}
+            </div>
+        </div>
+
+        <!-- No result -->
+        <div v-else class="no-result apollo"></div>
+      </template>
+      </ApolloQuery>
+
+        <ApolloQuery
+        :query="gql => gql`
             query MyQuery($nama: String!) {
                 threshold(where: {green_house: {nama: {_eq: $nama}}}) {
                     co2
@@ -30,7 +64,7 @@
             v-for="(item, index) in data" 
             :key=index
             >
-                <div v-if="item[0] !=undefined">
+                <div v-if="item[0] != undefined">
                     {{setEnv(item[0])}}
                 </div>
                 <div v-else>
@@ -42,24 +76,6 @@
         <!-- No result -->
         <div v-else class="no-result apollo"></div>
       </template>
-      <ApolloSubscribeToMore
-        :document="
-          (gql) => gql`
-            subscription MySubscription($nama: String!) {
-                threshold(where: {green_house: {nama: {_eq: $nama}}}) {
-                    co2
-                    humidity
-                    light
-                    plant_name
-                    soil_moist
-                    temp
-                }
-            }
-          `
-        "
-        :variables="greenhouseComputed"
-        :updateQuery="onUpdated"
-      />
       </ApolloQuery>
 
         <v-dialog
@@ -80,6 +96,7 @@
                 <span class="text-h5">Settings Greenhouse Environment</span>
                 </v-card-title>
                 <v-card-text>
+                <span class="text-h7">Before</span>
                 <v-container>
                     <v-row>
                     <v-col
@@ -90,8 +107,7 @@
                         <v-text-field
                         label="Plant Name"
                         v-model="nama_tumbuhan"
-                        hint="Tomat"
-                        required
+                        readonly
                         ></v-text-field>
                     </v-col>
                     <v-col
@@ -103,8 +119,7 @@
                         label="Soil Moisture"
                         v-model="soilMoist"
                         type="number"
-                        hint="80"
-                        required
+                        readonly
                         ></v-text-field>
                     </v-col>
                     <v-col
@@ -116,35 +131,120 @@
                         label="Light Brightness"
                         v-model="light"
                         type="number"
-                        hint="75"
-                        required
+                        readonly
                         ></v-text-field>
                     </v-col>
-                    <v-col cols="12">
+                    <v-col
+                        cols="12"
+                        sm="6"
+                        md="4"
+                    >
                         <v-text-field
                         label="Humidity"
                         v-model="humidity"
                         type="number"
-                        required
+                        readonly
                         ></v-text-field>
                     </v-col>
-                    <v-col cols="12">
+                    <v-col
+                        cols="12"
+                        sm="6"
+                        md="4"
+                    >
                         <v-text-field
                         label="CO2"
                         v-model="co2"
+                        type="number"
+                        readonly
+                        ></v-text-field>
+                    </v-col>
+                    <v-col
+                        cols="12"
+                        sm="6"
+                        md="4"
+                    >
+                        <v-text-field
+                        label="Temperature"
+                        v-model="temp"
+                        type="number"
+                        readonly
+                        ></v-text-field>                        
+                    </v-col>
+                    </v-row>
+                </v-container>
+                <span class="text-h7">Edit Here</span>
+                <v-container>
+                    <v-row>
+                    <v-col
+                        cols="12"
+                        sm="6"
+                        md="4"
+                    >
+                        <v-text-field
+                        label="Plant Name"
+                        v-model="editNamaTumbuhan"
+                        required
+                        ></v-text-field>
+                    </v-col>
+                    <v-col
+                        cols="12"
+                        sm="6"
+                        md="4"
+                    >
+                        <v-text-field
+                        label="Soil Moisture"
+                        v-model="editSoilMoist"
                         type="number"
                         required
                         ></v-text-field>
                     </v-col>
                     <v-col
                         cols="12"
+                        sm="6"
+                        md="4"
                     >
                         <v-text-field
-                        label="Temperature"
-                        v-model="temp"
+                        label="Light Brightness"
+                        v-model="editLight"
                         type="number"
                         required
                         ></v-text-field>
+                    </v-col>
+                    <v-col
+                        cols="12"
+                        sm="6"
+                        md="4"
+                    >
+                        <v-text-field
+                        label="Humidity"
+                        v-model="editHumidity"
+                        type="number"
+                        required
+                        ></v-text-field>
+                    </v-col>
+                    <v-col
+                        cols="12"
+                        sm="6"
+                        md="4"
+                    >
+                        <v-text-field
+                        label="CO2"
+                        v-model="editCo2"
+                        type="number"
+                        required
+                        ></v-text-field>
+                    </v-col>
+                    <v-col
+                        cols="12"
+                        sm="6"
+                        md="4"
+                    >
+                        <v-text-field
+                        label="Temperature"
+                        v-model="editTemp"
+                        type="number"
+                        required
+                        ></v-text-field>                        
                     </v-col>
                     </v-row>
                 </v-container>
@@ -160,10 +260,11 @@
                 </v-btn>
                 <ApolloMutation
                 :mutation="gql => gql`
-                    mutation MyMutation($nama: String!, $co2: Int!, $humidity: Int!, $light: Int!, $plant_name: String!, $soil_moist: Int!, $temp: Int!) {
+                    mutation UpdateEnv($nama: String!, $co2: Int!, $humidity: Int!, $light: Int!, $plant_name: String!, $soil_moist: Int!, $temp: Int!) {
                     update_threshold(where: {green_house: {nama: {_eq:$nama}}}, _set: {co2: $co2, humidity: $humidity, light: $light, plant_name: $plant_name, soil_moist: $soil_moist, temp: $temp}) {
-                        
-                }
+                        affected_rows
+                        }
+                    }
                 `"
                 :variables="updateEnv"
                 >
@@ -176,9 +277,9 @@
                     <v-btn
                         color="#94B447"
                         text
-                        @click="mutate(); dialog = false; addEnvStore()"
+                        @click="mutate(); dialog = false; resetEdit()"
                     >
-                        Save
+                        Update
                     </v-btn>
                 </template>
                 </ApolloMutation>
@@ -198,11 +299,22 @@ export default {
         soilMoist:0,
         temp:0,
         nama_tumbuhan:"",
+        editHumidity:0,
+        editCo2:0,
+        editLight:0,
+        editSoilMoist:0,
+        editTemp:0,
+        editNamaTumbuhan:"",
+        idGreenhouse:0,
     }),
     methods:{
-        addEnvStore(){
-            this.$store.dispatch('updateTreshold', this.updateEnv);
-        },
+        // addEnvStore(){
+        //     console.log(this.updateEnv);
+        //     this.$store.dispatch('updateTresholdMoist', this.editSoilMoist);
+        //     this.$store.dispatch('updateTresholdLight', this.editLight);
+        //     this.$store.dispatch('updateTresholdHumidity', this.editHumidity);
+        //     this.$store.dispatch('updateTresholdTemp', this.editTemp);
+        // },
         setEnv(param){
             if(param.plant_name == undefined){
                 this.nama_tumbuhan = "";
@@ -222,6 +334,19 @@ export default {
                 this.co2 = param.co2;
             }
         },
+        
+        dataRead(param){
+            console.log(param);
+        },
+        resetEdit(){
+            this.editNamaTumbuhan = "";
+            this.editHumidity = 0;
+            this.editLight = 0;
+            this.editSoilMoist = 0;
+            this.editTemp = 0;
+            this.editCo2 = 0;
+        },
+
         resetEnv(){
             this.nama_tumbuhan = "";
             this.humidity = 0;
@@ -230,29 +355,37 @@ export default {
             this.temp = 0;
             this.co2 = 0;
         },
-        onUpdated(previousResult, { subscriptionData }) {
-            return {
-                treshold: subscriptionData.data.treshold
-            }
-        },
+        addIdGreenhouse(param){
+            this.idGreenhouse = param;
+        }
     },
     computed:{
         updateEnv(){
             return{
                 nama: this.greenhouseStore,
-                plant_name: this.nama_tumbuhan,
-                co2: this.co2,
-                humidity: this.humidity,
-                light: this.light,
-                soil_moist: this.soilMoist,
-                temp: this.temp
+                plant_name: this.editNamaTumbuhan,
+                co2: this.editCo2,
+                humidity: this.editHumidity,
+                light: this.editLight,
+                soil_moist: this.editSoilMoist,
+                temp: this.editTemp
+            }
+        },
+        addEnv(){
+            return{
+                id_greenhouse: this.idGreenhouse,
+                plant_name: this.editNamaTumbuhan,
+                co2: this.editCo2,
+                humidity: this.editHumidity,
+                light: this.editLight,
+                soil_moist: this.editSoilMoist,
+                temp: this.editTemp
             }
         },
         greenhouseStore(){
             return this.$store.state.selectGH;
         },
         greenhouseComputed(){
-            console.log(this.greenhouseStore)
             if(this.greenhouseStore == ""){
                 return {nama: "tidakada"}
             }
