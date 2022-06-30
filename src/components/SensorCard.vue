@@ -53,7 +53,7 @@
                     <v-img
                     class=" order-2 white--text align-center"
                     contain
-                    src="../assets/card_empty_xl-min.jpg"
+                    src="../assets/card_mini-min.png"
                     max-width="450px"
                     >
                         <v-card-title class="display-3 text-right pl-12"> {{"Select Your"}}</v-card-title>
@@ -99,7 +99,7 @@
             class="order-2 pa-2 white--text align-center"
             alt="IoT Soil Moisture"
             contain
-            src="../assets/cardSoilMoist-min.jpg"
+            src="../assets/card-soil-min.png"
             max-width="450px"
             >
                 <div class="d-flex justify-center mb-6">
@@ -113,7 +113,7 @@
             class="order-4 pa-2 white--text align-center"
             alt="IoT Light Brightness"
             contain
-            src="../assets/cardLightBright-min.jpg"
+            src="../assets/card-light-min.png"
             max-width="450px"
             >
                 <div class="d-flex justify-center mb-6">
@@ -176,7 +176,7 @@
                 class="order-2 pa-2 white--text align-center"
                 alt="IoT Soil Moisture No Sensor"
                 contain
-                src="../assets/cardSoilMoist-min.jpg"
+                src="../assets/card-soil-min.png"
                 max-width="450px"
                 >
                     <v-card-title class="pl-16 display-3"> {{"No Sensor"}}</v-card-title>
@@ -188,7 +188,7 @@
                 class="order-4 pa-2 white--text align-center"
                 alt="IoT Light Brightness No Sensor"
                 contain
-                src="../assets/cardLightBright-min.jpg"
+                src="../assets/card-light-min.png"
                 max-width="450px"
                 >
                     <v-card-title class="pl-16 display-3"> {{"No Sensor"}}</v-card-title>

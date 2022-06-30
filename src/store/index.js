@@ -11,6 +11,7 @@ export default new Vuex.Store({
     plugins:[persistedDataState],
     state:{
         selectGH:"GH_Surabaya",
+        selectIdGH: 0,
         page : "",
         tresholdMoist: 0,
         tresholdLight:0,
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     mutations:{
         setGH(state, payload){
             state.selectGH = payload;
+        },
+        setIdGH(state, payload){
+            state.selectIdGH = payload;
         },
         setTreshold(state, param){
             state.treshold[0] = param;
@@ -61,6 +65,9 @@ export default new Vuex.Store({
     actions: {
         selectGH(store, param){
             store.commit("setGH", param);
+        },
+        selectIdGH(store, param){
+            store.commit("setIdGH", param);
         },
         updateTreshold(store, param){
             store.commit("setTreshold", param);
