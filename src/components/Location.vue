@@ -6,8 +6,9 @@
             query MyQuery($nama: String!) {
                 green_house(where: {nama: {_eq:$nama}}) {
                     Alamat
+                    id
                 }
-                }
+            }
         `"
         :variables="greenhouseComputed"
       >
@@ -26,6 +27,7 @@
             <div v-if="data.green_house !=''">
                 <div v-for="(item,index) in data.green_house" :key="index">
                     {{item.Alamat}}
+                    {{changeIdGH(item.id)}}
                 </div>
             </div>
             <div v-else>{{"Pilih Green House Dahulu"}}</div>
@@ -69,6 +71,9 @@ export default {
             return {
                 green_house: subscriptionData.data.green_house
             }
+        },
+        changeIdGH(param){
+            this.$store.dispatch('selectIdGH', param);
         },
     },
 
