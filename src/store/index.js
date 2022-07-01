@@ -11,7 +11,12 @@ export default new Vuex.Store({
     plugins:[persistedDataState],
     state:{
         selectGH:"GH_Surabaya",
+        selectIdGH: 0,
         page : "",
+        tresholdMoist: 0,
+        tresholdLight:0,
+        tresholdHumidity:0,
+        tresholdTemp:0,
         treshold:[],
         moistNow: 0,
         lightNow: 0,
@@ -22,6 +27,9 @@ export default new Vuex.Store({
     mutations:{
         setGH(state, payload){
             state.selectGH = payload;
+        },
+        setIdGH(state, payload){
+            state.selectIdGH = payload;
         },
         setTreshold(state, param){
             state.treshold[0] = param;
@@ -40,14 +48,41 @@ export default new Vuex.Store({
         },
         setTemp(state, payload){
             state.tempNow = payload;
-        }
+        },
+        setTresholdMoist(state, payload){
+            state.tresholdMoist = payload;
+        },
+        setTresholdLight(state, payload){
+            state.tresholdLight = payload;
+        },
+        setTresholdHumidity(state, payload){
+            state.tresholdHumidity = payload;
+        },
+        setTresholdTemp(state, payload){
+            state.tresholdMoist = payload;
+        },
     },
     actions: {
         selectGH(store, param){
             store.commit("setGH", param);
         },
+        selectIdGH(store, param){
+            store.commit("setIdGH", param);
+        },
         updateTreshold(store, param){
             store.commit("setTreshold", param);
+        },
+        updateTresholdMoist(store, param){
+            store.commit("setTresholdMoist", param);
+        },
+        updateTresholdLight(store, param){
+            store.commit("setTresholdLight", param);
+        },
+        updateTresholdHumidity(store, param){
+            store.commit("setTresholdHumidity", param);
+        },
+        updateTresholdTemp(store, param){
+            store.commit("setTresholdTemp", param);
         },
         updateHumidity(store,param) {
             store.commit("setHumidity", param);
