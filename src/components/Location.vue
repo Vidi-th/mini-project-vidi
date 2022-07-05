@@ -30,7 +30,12 @@
                     {{changeIdGH(item.id)}}
                 </div>
             </div>
-            <div v-else>{{"Pilih Green House Dahulu"}}</div>
+            <div v-else>
+                <div v-for="(item,index) in data.green_house" :key="index">
+                    {{item.Alamat}}
+                </div>
+                
+            </div>
         </div>
         <!-- No result -->
         <div v-else class="no-result apollo">Pilih Green House Dahulu</div>

@@ -12,11 +12,11 @@ import { getMainDefinition } from 'apollo-utilities'
 Vue.config.productionTip = false
 
 const httpLink = new HttpLink({
-  uri : 'http://mini-project-vidi.hasura.app/v1/graphql',
+  uri : 'https://mini-project-vidi.hasura.app/v1/graphql',
 })
 
 const wsLink = new WebSocketLink({
-  uri:'ws://mini-project-vidi.hasura.app/v1/graphql',
+  uri:'wss://mini-project-vidi.hasura.app/v1/graphql',
   options: {
       reconnect: true,
   }

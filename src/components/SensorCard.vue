@@ -117,7 +117,7 @@
             max-width="450px"
             >
                 <div class="d-flex justify-center mb-6">
-                    <v-card-title class="display-3"> {{lightFromStore}}%</v-card-title>
+                    <v-card-title class="display-3"> {{lightFromStore}}</v-card-title>
                 </div>
             </v-img>
 
