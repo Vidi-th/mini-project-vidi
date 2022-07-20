@@ -239,6 +239,9 @@
                 <v-spacer class="order-7 pa-2"></v-spacer>
             </div>
         </div>
+        <div>
+            {{this.subMqtt}}
+        </div>
     </v-container>
 </template>
 
@@ -248,6 +251,7 @@ export default {
         node: 1,
         green_house:{},
         cardActive : false,
+        subMqtt: null,
     }),
     methods:{
         lastarr(data){
@@ -302,5 +306,17 @@ export default {
             return this.$store.state.co2Now;
         },
     },
+    mqtt: {
+    /** 'VueMqtt/#' or 'VueMqtt/+' or '+/+' or '#' */
+    'greenhouseVidi/+' (data, topic) {
+      if (topic.split('/').pop() === 'Publish1') {
+        console.log('topic:', 'greenhouseVidi/Publish1');
+      }
+      if (topic.split('/').pop() === 'Publish2') {
+        console.log('topic:', 'greenhouseVidi/Publish2');
+      }
+      this.subMqtt = this.subMqtt + data + "   ";
+    }
+  }
 }
 </script>

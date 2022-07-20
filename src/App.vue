@@ -79,5 +79,8 @@ export default {
       this.$router.push({name: path})
     }
   },
+  mounted () {
+    this.$mqtt.subscribe('greenhouseVidi/#')
+  }
 };
 </script>

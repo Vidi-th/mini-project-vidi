@@ -8,6 +8,9 @@ import { ApolloClient, HttpLink, InMemoryCache, split } from
 import VueApollo from 'vue-apollo'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
+import VueMqtt from 'vue-mqtt'
+
+Vue.use(VueMqtt, 'ws://broker.emqx.io:8083/mqtt', "clean: true, connectTimeout: 4000, reconnectPeriod: 4000, clientId: 'mqttjs_3be2c321', username: 'emqx_test', password: 'emqx_test'")
 
 Vue.config.productionTip = false
 
