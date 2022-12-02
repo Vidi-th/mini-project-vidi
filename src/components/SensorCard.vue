@@ -148,7 +148,7 @@
                     src="../assets/cardCO2-min.jpg"
                     max-width="250px"
                     >
-                        <v-card-title class="display-0 text-right pl-4"> {{co2FromStore}} ppm </v-card-title>
+                        <v-card-title class="display-0 text-right pl-4"> {{this.subMqtt}} ppm </v-card-title>
                     </v-img>
                 </div>
 
@@ -239,9 +239,6 @@
                 <v-spacer class="order-7 pa-2"></v-spacer>
             </div>
         </div>
-        <div>
-            {{this.subMqtt}}
-        </div>
     </v-container>
 </template>
 
@@ -315,7 +312,7 @@ export default {
       if (topic.split('/').pop() === 'Publish2') {
         console.log('topic:', 'greenhouseVidi/Publish2');
       }
-      this.subMqtt = this.subMqtt + data + "   ";
+      this.subMqtt = data;
     }
   }
 }
