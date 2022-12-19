@@ -2,15 +2,15 @@
     <v-container>
         <ApolloQuery
         :query="gql => gql`
-            query MyQuery($nama: String!) {
-                green_house(where: {nama: {_eq: $nama}}) {
+            query DataSensor($nama: String!) {
+                green_house(where: {name_gh: {_eq: $nama}}) {
                     sensors {
                         soil_moisture
                         light_brightness
                         humidity
                         co2
                         soil_temp
-                        id
+                        id_sensor
                         id_gh
                     }
                 }
@@ -70,15 +70,15 @@
       <ApolloSubscribeToMore
         :document="
           (gql) => gql`
-            subscription MySubscription($nama: String!) {
-                green_house(where: {nama: {_eq: $nama}}) {
+            subscription DataSensor($nama: String!) {
+                green_house(where: {name_gh: {_eq: $nama}}) {
                     sensors {
                         soil_moisture
                         light_brightness
                         humidity
                         co2
                         soil_temp
-                        id
+                        id_sensor
                         id_gh
                     }
                 }

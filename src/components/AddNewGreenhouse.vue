@@ -57,10 +57,10 @@
                 </v-btn>
                 <ApolloMutation
                 :mutation="gql => gql`
-                    mutation MyMutation($nama: String!, $Alamat: String!) {
-                        insert_green_house_one(object: {nama: $nama, Alamat: $Alamat}) {
-                            nama
-                            Alamat
+                    mutation MyMutation($nama: String!, $alamat: String!) {
+                        insert_green_house_one(object: {name_gh: $nama, adress_gh: $alamat}) {
+                            name_gh
+                            adress_gh
                         }
                     }
                 `"
@@ -98,7 +98,7 @@ export default {
         addGH(){
             return{
                 nama: this.greenhouse_name,
-                Alamat: this.greenhouse_address
+                alamat: this.greenhouse_address
             }
         },
     }

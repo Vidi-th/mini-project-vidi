@@ -44,10 +44,10 @@
        </v-toolbar>
       <ApolloQuery
         :query="gql => gql`
-            query GreenHouse {
+            query GreenHouseName {
               green_house {
-                nama
                 id
+                name_gh
               }
             }
         `"
@@ -68,7 +68,7 @@
           v-for="(item, index) in data.green_house"
           :key="index"
           >
-          {{addData(item.nama,index)}}
+          {{addData(item.name_gh,index)}}
           </div>
         </div>
 
@@ -80,8 +80,8 @@
           (gql) => gql`
             subscription MySubscription {
               green_house {
-                nama
                 id
+                name_gh
               }
             }
           `

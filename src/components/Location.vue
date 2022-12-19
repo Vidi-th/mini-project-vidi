@@ -3,10 +3,10 @@
         
         <ApolloQuery 
         :query="gql => gql`
-            query MyQuery($nama: String!) {
-                green_house(where: {nama: {_eq:$nama}}) {
-                    Alamat
+            query AdressGH($nama: String!) {
+                green_house(where: {name_gh: {_eq:$nama}}) {
                     id
+                    adress_gh
                 }
             }
         `"
@@ -26,15 +26,9 @@
         <div v-else-if="data" class="result apollo">
             <div v-if="data.green_house !=''">
                 <div v-for="(item,index) in data.green_house" :key="index">
-                    {{item.Alamat}}
+                    {{item.adress_gh}}
                     {{changeIdGH(item.id)}}
                 </div>
-            </div>
-            <div v-else>
-                <div v-for="(item,index) in data.green_house" :key="index">
-                    {{item.Alamat}}
-                </div>
-                
             </div>
         </div>
         <!-- No result -->
@@ -45,8 +39,9 @@
           (gql) => gql`
             subscription MySubscription {
               green_house {
-                nama
                 id
+                name_gh
+                adress_gh
               }
             }
           `

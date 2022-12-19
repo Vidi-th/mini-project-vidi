@@ -3,13 +3,13 @@
         <ApolloQuery
         :query="gql => gql`
             query MyQuery($nama: String!) {
-                threshold(where: {green_house: {nama: {_eq: $nama}}}) {
-                    id
-                    co2
+                treshold(where: {green_house: {name_gh: {_eq: $nama}}}) {
+                    id_treshold
                     humidity
+                    co2
                     light
+                    moist
                     plant_name
-                    soil_moist
                     temp
                 }
             }
@@ -42,9 +42,9 @@
         :document="
           (gql) => gql`
             subscription MySubscription($nama: String!) {
-                threshold_aggregate(where: {green_house: {nama: {_eq: $nama}}}) {
+                treshold_aggregate(where: {green_house: {name_gh: {_eq: $nama}}}) {
                     nodes {
-                    id
+                    id_treshold
                     }
                 }
             }
@@ -253,9 +253,9 @@
 
                 <ApolloMutation
                     :mutation="gql => gql`
-                    mutation MyMutation($object: threshold_insert_input = {}) {
-                        insert_threshold_one(object: $object) {
-                            id
+                    mutation MyMutation($object: treshold_insert_input = {}) {
+                        insert_treshold_one(object: $object) {
+                            id_treshold
                         }
                     }
                     `"
@@ -266,7 +266,7 @@
                             co2: editCo2,
                             humidity: editHumidity,
                             light: editLight,
-                            soil_moist: editSoilMoist,
+                            moist: editSoilMoist,
                             temp: editTemp
                         }
                     }"
@@ -326,7 +326,7 @@ export default {
                 this.nama_tumbuhan = lastElement.plant_name;
                 this.humidity = lastElement.humidity;
                 this.light = lastElement.light;
-                this.soilMoist = lastElement.soil_moist;
+                this.soilMoist = lastElement.moist;
                 this.temp = lastElement.temp;
                 this.co2 = lastElement.co2;
             }
@@ -389,7 +389,7 @@ export default {
                 co2: this.editCo2,
                 humidity: this.editHumidity,
                 light: this.editLight,
-                soil_moist: this.editSoilMoist,
+                soil: this.editSoilMoist,
                 temp: this.editTemp
             }
         },
@@ -400,7 +400,7 @@ export default {
                 co2: this.editCo2,
                 humidity: this.editHumidity,
                 light: this.editLight,
-                soil_moist: this.editSoilMoist,
+                soil: this.editSoilMoist,
                 temp: this.editTemp
             }
         },
