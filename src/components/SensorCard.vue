@@ -148,7 +148,7 @@
                     src="../assets/cardCO2-min.jpg"
                     max-width="250px"
                     >
-                        <v-card-title class="display-0 text-right pl-4"> {{this.subMqtt}} ppm </v-card-title>
+                        <v-card-title class="display-0 text-right pl-4"> {{co2FromStore}} ppm </v-card-title>
                     </v-img>
                 </div>
 
@@ -303,17 +303,5 @@ export default {
             return this.$store.state.co2Now;
         },
     },
-    mqtt: {
-    /** 'VueMqtt/#' or 'VueMqtt/+' or '+/+' or '#' */
-    'greenhouseVidi/+' (data, topic) {
-      if (topic.split('/').pop() === 'Publish1') {
-        console.log('topic:', 'greenhouseVidi/Publish1');
-      }
-      if (topic.split('/').pop() === 'Publish2') {
-        console.log('topic:', 'greenhouseVidi/Publish2');
-      }
-      this.subMqtt = data;
-    }
-  }
 }
 </script>

@@ -27,11 +27,16 @@
 
         <!-- Result -->
         <div v-else-if="data" class="result apollo"> 
-            <div
-            v-for="(item, index) in data" 
-            :key=index
-            >
-                {{lastarr(item)}}
+            <div v-if="data != []">
+                <div
+                v-for="(item, index) in data" 
+                :key=index
+                >
+                    {{lastarr(item)}}
+                </div>
+            </div>
+            <div v-else>
+                {{resetEnv()}}
             </div>
         </div>
 
@@ -42,10 +47,14 @@
         :document="
           (gql) => gql`
             subscription MySubscription($nama: String!) {
-                treshold_aggregate(where: {green_house: {name_gh: {_eq: $nama}}}) {
-                    nodes {
+                treshold(where: {green_house: {name_gh: {_eq: $nama}}}) {
+                    humidity
+                    co2
                     id_treshold
-                    }
+                    light
+                    moist
+                    plant_name
+                    temp
                 }
             }
           `
@@ -65,6 +74,7 @@
                 dark
                 v-on="on"
                 >
+                {{publishMQTT()}}
                 <v-icon>mdi-pencil</v-icon>
                 </v-btn>
             </template>
@@ -333,29 +343,13 @@ export default {
         },
         onUpdated(previousResult, { subscriptionData }) {
             return {
-                threshold: subscriptionData.data
+                treshold: subscriptionData.data
             }
         },
-        // setEnv(param){
-        //     if(param.plant_name == undefined){
-        //         this.nama_tumbuhan = "";
-        //         this.humidity = 0;
-        //         this.light = 0;
-        //         this.soilMoist = 0;
-        //         this.temp = 0;
-        //         this.co2 = 0;
-        //     }
-
-        //     else{
-        //         this.nama_tumbuhan = param.plant_name;
-        //         this.humidity = param.humidity;
-        //         this.light = param.light;
-        //         this.soilMoist = param.soil_moist;
-        //         this.temp = param.temp;
-        //         this.co2 = param.co2;
-        //     }
-        // },
-        
+        publishMQTT () {
+            console.log(" Publish to : greenhouseVidi/Treshold/" + this.idgreenhouseStore);
+            this.$mqtt.publish('greenhouseVidi/Treshold/' + this.idgreenhouseStore, this.soilMoist +';' + this.temp + ';' + this.light + ';' + this.humidity + ';' + this.soilMoist) 
+        },
         dataRead(param){
             console.log(param);
         },
@@ -379,6 +373,9 @@ export default {
         },
         addIdGreenhouse(param){
             this.idGreenhouse = param;
+        },
+        cetakData(data){
+            console.log(data.treshold);
         }
     },
     computed:{
