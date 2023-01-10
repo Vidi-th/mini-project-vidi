@@ -10,8 +10,9 @@ const persistedDataState = createPersistedState({
 export default new Vuex.Store({
     plugins:[persistedDataState],
     state:{
-        selectGH:"GH_Surabaya",
+        selectGH:"A",
         selectIdGH: 0,
+        selectAdress: "B",
         page : "",
         tresholdMoist: 0,
         tresholdLight:0,
@@ -30,6 +31,9 @@ export default new Vuex.Store({
         },
         setIdGH(state, payload){
             state.selectIdGH = payload;
+        },
+        setAdressGH(state, payload){
+            state.selectAdress = payload;
         },
         setTreshold(state, param){
             state.treshold[0] = param;
@@ -68,6 +72,9 @@ export default new Vuex.Store({
         },
         selectIdGH(store, param){
             store.commit("setIdGH", param);
+        },
+        selectAdressGH(store, param){
+            store.commit("setAdressGH", param);
         },
         updateTreshold(store, param){
             store.commit("setTreshold", param);

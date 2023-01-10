@@ -273,7 +273,7 @@ export default {
     },
     computed:{
         greenhouseComputed(){
-            if(this.greenhouseStore == ""){
+            if(this.greenhouseStore == null){
                 return {nama: "tidakada"}
             }
             return {nama: this.greenhouseStore}

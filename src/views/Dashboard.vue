@@ -5,9 +5,11 @@
         class="d-flex justify-center mb-6"
         >
             <v-icon class="order-1 pa-2">mdi-map-marker-radius</v-icon>
-            <Location class="order-2 pa-2 pt-4"/>
+            <div class="order-2 pa-2 pt-4">
+                {{adressComputed}}
+            </div>
             <v-spacer class="order-3 pa-2"></v-spacer>
-            <v-row class="order-4 pa-2">
+            <v-row class="order-4 pa-2 justify-end">
                 <SetEnv/>
             </v-row>
         </div>
@@ -55,7 +57,6 @@
 import SensorCard from "@/components/SensorCard.vue"
 import AktuaktorCard from "@/components/AktuaktorCard.vue"
 import GreenhouseOption from '../components/GreenhouseOption.vue'
-import Location from "@/components/Location.vue"
 import SetEnv from "@/components/SetEnvironment"
 
 export default {
@@ -77,7 +78,6 @@ export default {
         SensorCard,
         AktuaktorCard,
         GreenhouseOption,
-        Location,
         SetEnv,
     },
     methods:{
@@ -88,9 +88,8 @@ export default {
     mqtt: {
     /** 'VueMqtt/#' or 'VueMqtt/+' or '+/+' or '#' */
     'greenhouseVidi/+' (data, topic) {
-      if (topic.split('/').pop() === 'Publish2') {
-        console.log('topic:', 'greenhouseVidi/Publish2');
-      }
+      if (topic.split('/').pop() === 'Sensor') {
+
       this.subMqtt = data + '';
       let arr = this.subMqtt.split(';');
       // The array
@@ -101,8 +100,20 @@ export default {
       this.mq135 = arr[4];
       this.idGreenhouse = arr[5];
       this.subcribeData = true;
-      console.log('bool:', this.subcribeData);
-        }
+      }
     }
+    },
+    computed:{
+        adressComputed(){
+            if(this.adressStore == null){
+                return "Pilih Greenhouse"
+            }
+            return this.adressStore
+        },
+
+        adressStore(){
+            return this.$store.state.selectAdress;
+        }
+    },
 }
 </script>

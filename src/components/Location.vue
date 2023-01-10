@@ -18,36 +18,20 @@
         <div v-if="loading" class="loading apollo">Loading...</div>
 
         <!-- Error -->
-        <div v-else-if="error" class="error apollo">An error occurred
-          {{ error }}
+        <div v-else-if="error" class="error apollo">Pilih Green House Dahulu
         </div>
 
         <!-- Result -->
-        <div v-else-if="data" class="result apollo">
+        <div v-else-if="data.green_house" class="result apollo">
             <div v-if="data.green_house !=''">
                 <div v-for="(item,index) in data.green_house" :key="index">
                     {{item.adress_gh}}
-                    {{changeIdGH(item.id)}}
                 </div>
             </div>
         </div>
         <!-- No result -->
         <div v-else class="no-result apollo">Pilih Green House Dahulu</div>
       </template>
-      <ApolloSubscribeToMore
-        :document="
-          (gql) => gql`
-            subscription MySubscription {
-              green_house {
-                id
-                name_gh
-                adress_gh
-              }
-            }
-          `
-        "
-        :updateQuery="onUpdated"
-      />
       </ApolloQuery>
 
     </v-container>
@@ -79,13 +63,14 @@ export default {
 
     computed:{
         greenhouseComputed(){
-            if(this.greenhouseStore == ""){
-                return {nama: "tidakada"}
+            if(this.greenhouseStore == null){
+                return {nama: "belumdiinput"}
             }
             return {nama: this.greenhouseStore}
         },
 
         greenhouseStore(){
+            console.log(this.$store.state.selectGH);
             return this.$store.state.selectGH;
         }
     },

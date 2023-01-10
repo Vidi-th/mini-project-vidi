@@ -1,5 +1,29 @@
 <template>
     <v-container>
+      <v-dialog
+        transition="dialog-bottom-transition"
+        max-width="600"
+        v-model="dialog2"
+      >
+          <v-card>
+            <v-toolbar
+              color="#5D6E1E"
+              dark
+            >Failed to enter the data</v-toolbar>
+            <v-card-text>
+              <div class="text-h3 pa-12 d-flex justify-center">Greenhouse name is already in use. Please use another name!</div>
+            </v-card-text>
+            <v-card-actions class="justify-end">
+              <v-btn
+                    color="#94B447"
+                    text
+                    @click="dialog2 = false"
+                >
+                    Close
+                </v-btn>
+            </v-card-actions>
+          </v-card>
+      </v-dialog>
         <v-dialog
             v-model="dialog"
             persistent
@@ -68,8 +92,10 @@
                 >
                 <template v-slot="{ mutate, error}">
                 <!-- Error -->
-                <div v-if="error" class="error apollo">An error occurred
-                    {{ error }}
+                <div v-if="error">
+                    <div v-show = "hidden">
+                        {{dialog2 = true}}
+                    </div>
                 </div>
                 <!-- Mutate -->
                     <v-btn
@@ -91,6 +117,8 @@
 export default {
     data: () => ({
         dialog: false,
+        dialog2: false,
+        hidden: false,
         greenhouse_name :"",
         greenhouse_address :"",
     }),
@@ -101,6 +129,9 @@ export default {
                 alamat: this.greenhouse_address
             }
         },
-    }
+    },
+    methods: {
+
+    },
 }
 </script>

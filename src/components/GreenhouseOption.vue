@@ -33,6 +33,8 @@
                 :items="greenhouseItem"
                 label="Select Green House"
                 v-model="select"
+                item-text="namaGH"
+                item-value="idGH"
                 return-object
                 single-line
                 item-color="#E5E5E5"
@@ -48,6 +50,7 @@
               green_house {
                 id
                 name_gh
+                adress_gh
               }
             }
         `"
@@ -68,7 +71,7 @@
           v-for="(item, index) in data.green_house"
           :key="index"
           >
-          {{addData(item.name_gh,index)}}
+          {{addData(item,index)}}
           </div>
         </div>
 
@@ -82,6 +85,7 @@
               green_house {
                 id
                 name_gh
+                adress_gh
               }
             }
           `
@@ -111,14 +115,21 @@ export default {
   },
 
   methods: {
-    addData(param, id){
-      if(id>=this.greenhouseItem.length){
-        this.greenhouseItem.push(param);
+    addData(param, index){
+      if(index>=this.greenhouseItem.length){
+        this.greenhouseItem.push({
+          namaGH : param.name_gh,
+          idGH : param.id,
+          adressGH : param.adress_gh
+        });
       }
     },
 
     changeGH(param){
-      this.$store.dispatch('selectGH', param);
+      this.$store.dispatch('selectGH', param.namaGH);
+      this.$store.dispatch('selectIdGH', param.idGH);
+      this.$store.dispatch('selectAdressGH', param.adressGH);
+      console.log(param.adressGH);
     },
 
     onUpdated(previousResult, { subscriptionData }) {

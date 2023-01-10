@@ -74,7 +74,6 @@
                 dark
                 v-on="on"
                 >
-                {{publishMQTT()}}
                 <v-icon>mdi-pencil</v-icon>
                 </v-btn>
             </template>
@@ -339,16 +338,17 @@ export default {
                 this.soilMoist = lastElement.moist;
                 this.temp = lastElement.temp;
                 this.co2 = lastElement.co2;
+                console.log(" Publish to : greenhouseVidi/Treshold/" + this.idgreenhouseStore);
+                this.$mqtt.publish('greenhouseVidi/Treshold/' + this.idgreenhouseStore, this.soilMoist +';' + this.temp + ';' + this.light + ';' + this.humidity + ';' + this.co2) 
             }
         },
         onUpdated(previousResult, { subscriptionData }) {
             return {
-                treshold: subscriptionData.data
+                treshold: subscriptionData.data.treshold
             }
         },
         publishMQTT () {
-            console.log(" Publish to : greenhouseVidi/Treshold/" + this.idgreenhouseStore);
-            this.$mqtt.publish('greenhouseVidi/Treshold/' + this.idgreenhouseStore, this.soilMoist +';' + this.temp + ';' + this.light + ';' + this.humidity + ';' + this.soilMoist) 
+            
         },
         dataRead(param){
             console.log(param);
@@ -405,7 +405,7 @@ export default {
             return this.$store.state.selectGH;
         },
         greenhouseComputed(){
-            if(this.greenhouseStore == ""){
+            if(this.greenhouseStore == null){
                 return {nama: "tidakada"}
             }
             return {nama: this.greenhouseStore}
