@@ -31,6 +31,9 @@
         <!-- Result -->
         <div v-else-if="data" class="result apollo"> 
             <div v-if="data.green_house !=''">
+                <div v-show = "hidden">
+                        {{cardNull=false}}
+                    </div>
                 <div v-if="data.green_house[0].sensors !=''">
                     <div
                     v-for="(item, index) in lastarr(data.green_house[0].sensors)" 
@@ -42,11 +45,16 @@
 
                  <div v-else>
                     {{changeActive()}}
+                    <div v-show = "hidden">
+                        {{cardNull=false}}
+                    </div>
                  </div>
             </div>
 
             <div v-else class="no-result apollo">
-                {{changeActive()}}
+                <div v-show = "hidden">
+                        {{cardNull=true}}
+                    </div>
                 <div class="d-flex justify-center mb-12"
                 >
                     <v-spacer class="order-1 pa-2"></v-spacer>
@@ -166,7 +174,7 @@
                 </div>
                 <v-spacer class="order-7 pa-2"></v-spacer>
         </div>
-        <div v-else>
+        <div v-if='!cardActive && !cardNull'>
             <div
             class="d-flex justify-center mb-6"
             >
@@ -248,6 +256,7 @@ export default {
         node: 1,
         green_house:{},
         cardActive : false,
+        cardNull : false,
         subMqtt: null,
     }),
     methods:{
@@ -269,6 +278,9 @@ export default {
         },
         changeActive(){
             this.cardActive = false;
+        },
+        changeCardnull(){
+            this.cardNull = !this.cardNull;
         }
     },
     computed:{
