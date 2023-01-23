@@ -44,8 +44,8 @@
                  </div>
 
                  <div v-else>
-                    {{changeActive()}}
                     <div v-show = "hidden">
+                        {{changeActive()}}
                         {{cardNull=false}}
                     </div>
                  </div>
