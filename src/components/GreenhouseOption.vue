@@ -129,7 +129,6 @@ export default {
       this.$store.dispatch('selectGH', param.namaGH);
       this.$store.dispatch('selectIdGH', param.idGH);
       this.$store.dispatch('selectAdressGH', param.adressGH);
-      console.log(param.adressGH);
     },
 
     onUpdated(previousResult, { subscriptionData }) {

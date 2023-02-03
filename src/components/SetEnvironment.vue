@@ -350,9 +350,6 @@ export default {
         publishMQTT () {
             
         },
-        dataRead(param){
-            console.log(param);
-        },
         resetEdit(){
             this.editNamaTumbuhan = "";
             this.editHumidity = null;
@@ -374,9 +371,6 @@ export default {
         addIdGreenhouse(param){
             this.idGreenhouse = param;
         },
-        cetakData(data){
-            console.log(data.treshold);
-        }
     },
     computed:{
         updateEnv(){

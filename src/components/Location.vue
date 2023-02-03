@@ -70,7 +70,6 @@ export default {
         },
 
         greenhouseStore(){
-            console.log(this.$store.state.selectGH);
             return this.$store.state.selectGH;
         }
     },
